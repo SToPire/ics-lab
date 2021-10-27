@@ -1,4 +1,4 @@
-48 c7 c7 a8 dc 61 55  /* mov $0x5561dca8, %rdi */
+48 c7 c7 a8 dc 61 55  /* mov $0x5561dca8,%rdi */
 68 fa 18 40 00        /* pushq  $0x4018fa */
 c3                    /* retq */
 /* byte code = 13 bytes */

