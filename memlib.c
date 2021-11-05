@@ -48,6 +48,7 @@ void mem_deinit(void)
 void mem_reset_brk()
 {
     mem_brk = mem_start_brk;
+    memset(mem_start_brk,0,MAX_HEAP);
 }
 
 /* 
